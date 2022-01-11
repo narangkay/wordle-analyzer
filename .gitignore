@@ -1,0 +1,9 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# data files
+output/*
+all_input/*
+
+# executible
+# TODO(narangkay) Move executibles to bin dir so we don't need to gitignore each of them by name.
+analyzer
