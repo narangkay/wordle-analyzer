@@ -220,9 +220,10 @@ int main()
     do
     {
         indata >> s1 >> s2;
-        if ((c / 155700484) > p)
+        int newp = (c / (wrds.size() * wrds.size()));
+        if (newp > p)
         {
-            p = (c / 155700484);
+            p = newp;
             cout << p << " " << chrono::duration_cast<chrono::seconds>(chrono::steady_clock::now() - begin).count()
                  << "\n";
             outdata.close();
