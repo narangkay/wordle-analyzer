@@ -186,13 +186,19 @@ Result process(const string &s1, const string &s2)
 void loadwrds()
 {
     ifstream indata;
-    indata.open("5-letter-wrds.txt");
-    string s;
-    do
+    indata.open("input/5-letter-wrds.txt");
+    if (!indata)
     {
-        indata >> s;
+        cerr << "Error: input file could not be opened" << endl;
+        exit(1);
+    }
+    string s;
+    indata >> s;
+    while (!indata.eof())
+    {
         wrds.push_back(s);
-    } while (!indata.eof());
+        indata >> s;
+    }
     random_shuffle(wrds.begin(), wrds.end());
 }
 
@@ -200,7 +206,7 @@ int main()
 {
     loadwrds();
     ifstream indata;
-    indata.open("crossed-5-letter-wrds.txt");
+    indata.open("generated_input/crossed-5-letter-wrds.txt");
     if (!indata)
     {
         cerr << "Error: input file could not be opened" << endl;
@@ -209,7 +215,7 @@ int main()
     ofstream outdata;
     string s1, s2;
     long long c = 0;
-    long long p = 518;
+    long long p = 642;
     chrono::steady_clock::time_point begin = chrono::steady_clock::now();
     do
     {
