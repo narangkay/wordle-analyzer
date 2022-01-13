@@ -215,7 +215,7 @@ int main()
     ofstream outdata;
     string s1, s2;
     long long c = 0;
-    long long p = 642;
+    long long p = -1;
     chrono::steady_clock::time_point begin = chrono::steady_clock::now();
     do
     {
