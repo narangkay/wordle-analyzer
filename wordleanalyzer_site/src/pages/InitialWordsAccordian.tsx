@@ -25,11 +25,11 @@ const SingleWord: React.FC<{ word: string }> = (props) => {
             data-bs-parent="#initial-words-list"
         >
             <div className="accordion-body py-4 px-5">
-                <strong>This is the first item's accordion body.</strong> It is shown by default,
+                <strong>This is the first items accordion body.</strong> It is shown by default,
                 until the collapse plugin adds the appropriate classes that we use to style each
                 element. These classes control the overall appearance, as well as the showing and
                 hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-                our default variables. It's also worth noting that just about any HTML can go within
+                our default variables. Its also worth noting that just about any HTML can go within
                 the <code>.accordion-body</code>, though the transition does limit overflow.
             </div>
         </div>
@@ -42,7 +42,7 @@ const InitialWordsAccordian: React.FC<{
     if (!props.results) {
         return <div ></div>;
     }
-    const items = props.results.results.map(word => <SingleWord word={`${word}`}></SingleWord>);
+    const items = props.results.results.map(word => <SingleWord key={`${word}`} word={`${word}`}></SingleWord>);
     return (<div className="accordion w-full" id="initial-words-list">
         {items}
     </div>);
