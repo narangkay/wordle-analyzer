@@ -1,9 +1,8 @@
 import { trpc } from "@/utils/trpc"
 
 const Home = () => {
-  const { data, isLoading } = trpc.useQuery(["hello", { text: "Theo" }]);
-  if (isLoading) return <div>Loading...</div>
-  if (data) return <div>{data.greeting}</div>
+  const { data, isLoading } = trpc.useQuery(["get-starting-words-stats", { starting_words: ["slops"] }])
+
   return (<div className="w-screen flex flex-col h-screen justify-center items-center">
     <div className="text-2xl text-center">How good is your starting word?</div>
     <div className='p-2'></div>

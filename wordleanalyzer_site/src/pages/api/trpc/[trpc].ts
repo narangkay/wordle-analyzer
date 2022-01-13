@@ -2,15 +2,11 @@ import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
 import { z } from 'zod';
 
-const appRouter = trpc.router().query('hello', {
-    input: z
-        .object({
-            text: z.string().nullish(),
-        })
-        .nullish(),
+const appRouter = trpc.router().query('get-starting-words-stats', {
+    input: z.object({ starting_words: z.array(z.string()) }),
     resolve({ input }) {
         return {
-            greeting: `hello ${input?.text ?? 'world'}`,
+            results: input.starting_words
         };
     },
 });
