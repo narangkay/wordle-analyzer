@@ -2,9 +2,12 @@
 
 # data files
 output/*
+compressed_output/*
 generated_input/*
+output.zip
 
 # executible
 # TODO(narangkay) Move executibles to bin dir so we don't need to gitignore each of them by name.
 analyzer
 combiner
+collector
