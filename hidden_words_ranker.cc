@@ -70,7 +70,7 @@ int main()
     for (auto x : sorter)
     {
         double avgguesses = x.guesses;
-        avgguesses /= x.wordscouldnotguess;
+        avgguesses /= x.wordscouldguess;
         outdata << x.ans << " " << avgguesses << " " << x.wordscouldguess << " " << x.wordscouldnotguess << "\n";
     }
 }

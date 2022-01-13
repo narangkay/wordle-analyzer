@@ -1,8 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # data files
-output/*
-compressed_output/*
+*output/wordle-analyzer-result*
 generated_input/*
 output.zip
 
