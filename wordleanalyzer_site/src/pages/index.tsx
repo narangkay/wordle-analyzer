@@ -1,8 +1,14 @@
 import { trpc } from "@/utils/trpc"
+import { inferQueryResponse } from "@/pages/api/trpc/[trpc]";
+import dynamic from 'next/dynamic'
+
+const InitialWordsAccordianlWithNoSSR = dynamic(
+  () => import('@/pages/InitialWordsAccordian'),
+  { ssr: false }
+)
 
 const Home = () => {
-  const { data, isLoading } = trpc.useQuery(["get-starting-words-stats", { starting_words: ["slops"] }])
-
+  const { data, isLoading } = trpc.useQuery(["get-starting-words-stats", { starting_words: ["slops", "clomp", "table", "weird"] }])
   return (<div className="w-screen flex flex-col h-screen justify-center items-center">
     <div className="text-4xl text-center">How good is your starting word?</div>
     <form className="w-full max-w-xs">
@@ -13,10 +19,10 @@ const Home = () => {
         </button>
       </div>
     </form>
-    <div className='p-2'></div>
-    <div className="border rounded p-8 flex flex-col justify-between max-w-2xl items-center">
-      <div className='w-full max-w-lg h-16 text-center fkex text-4xl'>Top 10 starting words</div>
-      <div className='w-full max-w-lg h-16 text-center fkex'></div>
+    <div className='p-10'></div>
+    <div className=" p-2 flex flex-col justify-between w-full max-w-md">
+      <div className='w-full  h-16 text-center fkex text-4xl'>Top 5 starting words</div>
+      <InitialWordsAccordianlWithNoSSR results={data} />
     </div >
   </div >
   )
