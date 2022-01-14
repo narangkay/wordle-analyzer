@@ -21,8 +21,10 @@ class CustomWordLookupForm extends React.Component<{ setEnableSearch: React.Disp
 
     async handleClick(event: any) {
         event.preventDefault();
-        this.props.setWordToSearch(this.state.textInput)
-        this.props.setEnableSearch(true);
+        if (this.state.textInput.length == 5) {
+            this.props.setWordToSearch(this.state.textInput)
+            this.props.setEnableSearch(true);
+        }
     }
 
     handleChange(event: any) {
@@ -36,13 +38,18 @@ class CustomWordLookupForm extends React.Component<{ setEnableSearch: React.Disp
             <form className="w-full max-w-xs" onSubmit={this.handleClick}>
                 <div className="flex items-center border-b border-teal-500 py-2">
                     <input onChange={this.handleChange} className="text-6xl  appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="table" aria-label="free text" />
-                    <button onClick={this.handleClick} className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-2xl border-4 text-white py-1 px-2 rounded" type="button">
+                    <button
+                        disabled={this.state.textInput.length != 5}
+                        onClick={this.handleClick}
+                        className={`${this.state.textInput.length == 5 ?
+                            "bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700" : "bg-gray-500 border-gray-500"
+                            } flex-shrink-0 text-2xl border-4 text-white py-1 px-2 rounded`} type="button">
                         Search!
                     </button>
                 </div>
-            </form>
+            </form >
             <InitialWordCard result={this.props.searchResults} />
-        </div>);
+        </div >);
     }
 };
 
