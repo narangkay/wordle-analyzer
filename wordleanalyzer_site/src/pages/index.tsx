@@ -3,14 +3,12 @@ import InitialWordsAccordian from "./InitialWordsAccordian";
 
 function backfillDb(addResult: any) {
   return () => {
-    console.log("hello world");
     addResult.mutate({
       results: [
         { word: "table", numGuessed: 3, numNotGuessed: 1, avgGuesses: 1.2 },
         { word: "weird", numGuessed: 3, numNotGuessed: 1, avgGuesses: 1.2 },
       ]
     });
-    console.log(addResult.status);
   }
 }
 
