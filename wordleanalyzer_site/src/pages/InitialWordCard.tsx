@@ -32,9 +32,9 @@ const InitialWordCard: React.FC<{
             {/* <div className="py-4 px-5">
                 {result.rankByGuessesNeeded}
             </div> */}
-            <div className="py-4 px-5">
+            {/* <div className="py-4 px-5">
                 {result.rankBySuccessRate}
-            </div>
+            </div> */}
         </div>);
 };
 
