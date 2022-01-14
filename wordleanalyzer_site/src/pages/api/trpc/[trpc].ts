@@ -3,6 +3,7 @@ import * as trpcNext from '@trpc/server/adapters/next';
 import { z } from 'zod';
 import { inferProcedureOutput } from "@trpc/server";
 import { prisma } from "@/utils/db"
+import { StartingWord } from '@prisma/client';
 
 const initialWordResult = z.object({
     word: z.string(),
@@ -16,7 +17,17 @@ const initialWordResult = z.object({
 const appRouter = trpc.router().query('get-starting-words-results', {
     input: z.object({ starting_words: z.array(z.string()) }),
     async resolve({ input }) {
-        const results = input.starting_words.map(word => { return { word: word } });
+        let results: StartingWord[] = [];
+        await Promise.all(input.starting_words.map(async (word) => {
+            const result = await prisma.startingWord.findUnique({
+                where: {
+                    word: word,
+                }
+            });
+            if (result) {
+                results.push(result);
+            }
+        }));
         return {
             results: results
         };
