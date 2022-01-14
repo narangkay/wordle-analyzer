@@ -11,8 +11,10 @@ datasource db {
 }
 
 model StartingWord {
-  word          String @id
-  numGuessed    Int
-  numNotGuessed Int
-  avgGuesses    Float
+  word                String @id
+  numGuessed          Int
+  numNotGuessed       Int
+  avgGuesses          Float
+  rankBySuccessRate   Int
+  rankByGuessesNeeded Int
 }

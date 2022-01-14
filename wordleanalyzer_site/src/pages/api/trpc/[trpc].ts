@@ -9,6 +9,8 @@ const initialWordResult = z.object({
     numGuessed: z.number().int(),
     numNotGuessed: z.number().int(),
     avgGuesses: z.number(),
+    rankBySuccessRate: z.number().int(),
+    rankByGuessesNeeded: z.number().int(),
 });
 
 const appRouter = trpc.router().query('get-starting-words-results', {
