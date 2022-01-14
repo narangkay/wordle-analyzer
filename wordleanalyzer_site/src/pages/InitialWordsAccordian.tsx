@@ -1,24 +1,29 @@
-// import 'tw-elements';
 import { inferQueryResponse } from "@/pages/api/trpc/[trpc]";
-
+import React from 'react';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
 
 type InitialWordResults = inferQueryResponse<"get-starting-words-stats">;
 
 const SingleWord: React.FC<{ word: string }> = (props) => {
-    return (<div className="accordion-item border w-full">
-        <h2 className="accordion-header mb-0" id={`id-${props.word}`}>
-            <button
-                className="accordion-button collapsed relative capitalize flex items-center w-full py-4 px-5 text-base text-white text-left bg-gray-700 border-0 rounded-none transition focus:outline-none"
-                type="button"
+    return (<AccordionItem className="border w-full" uuid={`${props.word}`}>
+        <AccordionItemHeading className="mb-0" id={`id-${props.word}`}>
+            <AccordionItemButton
+                className="collapsed relative capitalize flex items-center w-full py-4 px-5 text-base text-white text-left bg-gray-700 border-0 rounded-none transition focus:outline-none"
                 data-bs-toggle="collapse"
                 data-bs-target={`#id-collapse-${props.word}`}
                 aria-expanded="true"
                 aria-controls={`id-collapse-${props.word}`}
             >
                 {props.word}
-            </button>
-        </h2>
-        <div
+            </AccordionItemButton>
+        </AccordionItemHeading>
+        <AccordionItemPanel
             id={`id-collapse-${props.word}`}
             className="accordion-collapse collapse"
             aria-labelledby={`id-${props.word}`}
@@ -32,8 +37,8 @@ const SingleWord: React.FC<{ word: string }> = (props) => {
                 our default variables. Its also worth noting that just about any HTML can go within
                 the <code>.accordion-body</code>, though the transition does limit overflow.
             </div>
-        </div>
-    </div>);
+        </AccordionItemPanel>
+    </AccordionItem>);
 };
 
 const InitialWordsAccordian: React.FC<{
@@ -43,9 +48,9 @@ const InitialWordsAccordian: React.FC<{
         return <div ></div>;
     }
     const items = props.results.results.map(word => <SingleWord key={`${word}`} word={`${word}`}></SingleWord>);
-    return (<div className="accordion w-full" id="initial-words-list">
+    return (<Accordion allowZeroExpanded={true} className="w-full" id="initial-words-list">
         {items}
-    </div>);
+    </Accordion>);
 };
 
 export default InitialWordsAccordian;

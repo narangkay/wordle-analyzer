@@ -14,9 +14,9 @@
     "@trpc/server": "^9.16.0",
     "next": "12.0.7",
     "react": "17.0.2",
+    "react-accessible-accordion": "^4.0.0",
     "react-dom": "17.0.2",
     "react-query": "^3.34.8",
-    "tw-elements": "^1.0.0-alpha7",
     "zod": "^3.11.6"
   },
   "devDependencies": {
