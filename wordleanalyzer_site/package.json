@@ -1,5 +1,5 @@
 {
-  "name": "bestesit-com",
+  "name": "wordleanalyzer",
   "private": true,
   "scripts": {
     "dev": "next dev",
