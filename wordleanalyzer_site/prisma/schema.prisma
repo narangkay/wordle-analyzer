@@ -14,5 +14,5 @@ model StartingWord {
   word          String @id
   numGuessed    Int
   numNotGuessed Int
-  avgGuesses    String
+  avgGuesses    Float
 }

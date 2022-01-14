@@ -2,7 +2,7 @@ import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
 import { z } from 'zod';
 import { inferProcedureOutput } from "@trpc/server";
-import prisma from "@/utils/db"
+import { prisma } from "@/utils/db"
 
 const initialWordResult = z.object({
     word: z.string(),
@@ -11,7 +11,7 @@ const initialWordResult = z.object({
     avgGuesses: z.number(),
 });
 
-const appRouter = trpc.router().query('get-starting-words-stats', {
+const appRouter = trpc.router().query('get-starting-words-results', {
     input: z.object({ starting_words: z.array(z.string()) }),
     async resolve({ input }) {
         const results = input.starting_words.map(word => { return { word: word } });
@@ -19,16 +19,19 @@ const appRouter = trpc.router().query('get-starting-words-stats', {
             results: results
         };
     },
-}).mutation("add-starting-word-result", {
-    input: initialWordResult,
+}).mutation("add-starting-word-results", {
+    input: z.object({ results: z.array(initialWordResult) }),
     async resolve({ input }) {
-        // const resultInDb = await prisma.starting_word.create();
-        const resultInDb = await prisma.starting_word.create({
-            data: {
-                ...input
-            }
-        });
-        return { success: true, result: resultInDb };
+        var resultsInDb: z.infer<typeof initialWordResult>[] = [];
+        for (const result of input.results) {
+            const resultInDb = await prisma.startingWord.create({
+                data: {
+                    ...result
+                }
+            });
+            resultsInDb.push(resultInDb);
+        }
+        return { success: true, result: resultsInDb };
     },
 });
 
