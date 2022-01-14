@@ -6,30 +6,31 @@ import {
     AccordionItemHeading,
     AccordionItemButton,
     AccordionItemPanel,
+    AccordionItemState,
 } from 'react-accessible-accordion';
+import { HiChevronRight, HiChevronDown } from 'react-icons/hi'
 
 type InitialWordResults = inferQueryResponse<"get-starting-words-stats">;
 
 const SingleWord: React.FC<{ word: string }> = (props) => {
     return (<AccordionItem className="border w-full" uuid={`${props.word}`}>
-        <AccordionItemHeading className="mb-0" id={`id-${props.word}`}>
-            <AccordionItemButton
-                className="collapsed relative capitalize flex items-center w-full py-4 px-5 text-base text-white text-left bg-gray-700 border-0 rounded-none transition focus:outline-none"
-                data-bs-toggle="collapse"
-                data-bs-target={`#id-collapse-${props.word}`}
-                aria-expanded="true"
-                aria-controls={`id-collapse-${props.word}`}
-            >
-                {props.word}
+        <AccordionItemHeading>
+            <AccordionItemButton className="capitalize w-full py-4 px-5 text-base text-white text-left bg-gray-900 focus:outline-none">
+                <div className="flex items-center">
+                    <AccordionItemState>
+                        {({ expanded }) => (expanded ? <HiChevronDown size={25} /> : <HiChevronRight size={25} />)}
+                    </AccordionItemState>
+                    {props.word}
+                </div>
             </AccordionItemButton>
         </AccordionItemHeading>
         <AccordionItemPanel
-            id={`id-collapse-${props.word}`}
-            className="accordion-collapse collapse"
-            aria-labelledby={`id-${props.word}`}
-            data-bs-parent="#initial-words-list"
+        // id={`id-collapse-${props.word}`}
+        // className="accordion-collapse collapse"
+        // aria-labelledby={`id-${props.word}`}
+        // data-bs-parent="#initial-words-list"
         >
-            <div className="accordion-body py-4 px-5">
+            <div className="py-4 px-5">
                 <strong>This is the first items accordion body.</strong> It is shown by default,
                 until the collapse plugin adds the appropriate classes that we use to style each
                 element. These classes control the overall appearance, as well as the showing and
