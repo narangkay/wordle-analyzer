@@ -76,8 +76,25 @@ vector<Result> loadResults()
     return sorter;
 }
 
+set<string> officialWordList()
+{
+    set<string> officialWordList;
+    ifstream indata;
+    indata.open("input/wordle-5-letter-words.txt");
+    assert(indata);
+    string s;
+    indata >> s;
+    while (!indata.eof())
+    {
+        officialWordList.insert(s);
+        indata >> s;
+    }
+    return officialWordList;
+}
+
 int main()
 {
+    set<string> owl = officialWordList();
     auto sorter = loadResults();
     sort(sorter.begin(), sorter.end(), compareResults);
     long long rank = 0;
@@ -101,6 +118,7 @@ int main()
     {
         double avgguesses = x.guesses;
         avgguesses /= x.wordsguessed;
-        outdata << x.initial << " " << avgguesses << " " << x.wordsguessed << " " << x.wordsnotguessed << " " << x.rankBySuccessRate << " " << x.rankByGuessesNeeded << "\n";
+        bool isOfficial = (owl.find(x.initial) != owl.end());
+        outdata << x.initial << " " << avgguesses << " " << x.wordsguessed << " " << x.wordsnotguessed << " " << x.rankBySuccessRate << " " << x.rankByGuessesNeeded << " " << isOfficial << "\n";
     }
 }

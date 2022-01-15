@@ -46,9 +46,7 @@ import InitialWordsAccordian from "./InitialWordsAccordian";
 
 const Home = () => {
   const {
-    data: startingWordResults,
-    refetch,
-    isLoading,
+    data: startingWordResultsUnfiltered,
   } = trpc.useQuery(["get-starting-words-results", {
     starting_words: [
       "tamps",
@@ -67,6 +65,27 @@ const Home = () => {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   })
+  const {
+    data: startingWordResultsFiltered,
+  } = trpc.useQuery(["get-starting-words-results", {
+    starting_words: [
+      "midst",
+      "clasp",
+      "clump",
+      "stomp",
+      "strap",
+      "stamp",
+      "scalp",
+      "motif",
+      "splat",
+      "scald",
+    ]
+  }], {
+    refetchInterval: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  })
+  const [checked, setChecked] = React.useState(true);
   const [wordToSearch, setWordToSearch] = useState('');
   const [enableSearch, setEnableSearch] = useState(false);
   const {
@@ -91,7 +110,13 @@ const Home = () => {
     <div className=" p-2 flex flex-col justify-between w-full max-w-4xl">
       <div className='w-full  text-center fkex text-4xl'>Top 10 starting words globally</div>
       <div className='p-4'></div>
-      <InitialWordsAccordian results={startingWordResults?.results} />
+      <div className="flex">
+        <div className='w-full  text-right fkex text-md'>Filter to more commmon words</div>
+        <div className='p-1'></div>
+        <input checked={checked} onChange={() => setChecked(!checked)} className="mr-2 leading-tight" type="checkbox"></input>
+      </div>
+      <div className='p-1'></div>
+      <InitialWordsAccordian results={(checked ? startingWordResultsFiltered : startingWordResultsUnfiltered)?.results} />
     </div >
     <div className="w-full text-xl text-center pb-2">
       <a href="https://twitter.com/ancestrai">Twitter</a>

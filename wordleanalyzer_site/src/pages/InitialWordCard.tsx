@@ -12,12 +12,12 @@ function percentileNumSnapped(rank: number, total: number) {
     const p = percentileNum(rank, total);
     let percentiles = [1, 2, 5, 10, 15, 20, 25, 35]
     for (var perc of percentiles) {
-        if (p < perc) {
+        if (p <= perc) {
             return perc;
         }
     }
     for (var perc of percentiles) {
-        if (p > (100 - perc)) {
+        if (p >= (100 - perc)) {
             return 100 - perc;
         }
     }

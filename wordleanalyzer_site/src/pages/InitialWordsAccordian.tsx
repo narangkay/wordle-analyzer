@@ -36,18 +36,30 @@ const SingleWord: React.FC<{ result: StartingWord }> = (props) => {
     </AccordionItem>);
 };
 
-const InitialWordsAccordian: React.FC<{
-    results: StartingWord[] | undefined;
-}> = (props) => {
-    if (!props.results) {
-        return <div ></div>;
+class InitialWordsAccordian extends React.Component<{ results: StartingWord[] | undefined }, { filter: boolean }> {
+
+    constructor(props: { results: StartingWord[] }) {
+        super(props);
+        this.state = { filter: true };
+        // This binding is necessary to make `this` work in the callback
+        this.handleSelection = this.handleSelection.bind(this);
     }
-    const items = props.results.sort(function (a, b) {
-        return a.rankBySuccessRate - b.rankBySuccessRate;
-    }).map(r => <SingleWord key={`${r.word}`} result={r}></SingleWord>);
-    return (<Accordion allowZeroExpanded={true} className="w-full" id="initial-words-list">
-        {items}
-    </Accordion>);
-};
+
+
+    async handleSelection(event: any) {
+    }
+
+    render() {
+        if (!this.props.results) {
+            return <div ></div>;
+        }
+        const items = this.props.results.sort(function (a, b) {
+            return a.rankBySuccessRate - b.rankBySuccessRate;
+        }).map(r => <SingleWord key={`${r.word}`} result={r}></SingleWord>);
+        return (<Accordion allowZeroExpanded={true} className="w-full" id="initial-words-list">
+            {items}
+        </Accordion>);
+    }
+}
 
 export default InitialWordsAccordian;
