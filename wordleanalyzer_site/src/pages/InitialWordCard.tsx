@@ -41,13 +41,13 @@ function percentile(rank: number, total: number, suffix: string) {
         More or less the median word {suffix}
     </div>)
 }
-const optionsCursorTrueWithMargin = {
-    followCursor: true,
-    shiftX: -200,
-    shiftY: 0
-};
 
-function wrapWithInfo(el: {}, hoverText: string) {
+function wrapWithInfo(el: {}, hoverText: string, xShift: number) {
+    const optionsCursorTrueWithMargin = {
+        followCursor: true,
+        shiftX: xShift,
+        shiftY: 0
+    };
     return (<IconContext.Provider
         value={{ color: 'teal', size: '20px' }}
     >
@@ -59,7 +59,7 @@ function wrapWithInfo(el: {}, hoverText: string) {
                     <AiOutlineInfoCircle />
                 </Trigger>
                 <Hover type="hover">
-                    <h1 className="text text-black"> {hoverText} </h1>
+                    <h1 className="text text-black bg-gray-500 border border-black rounded"> {hoverText} </h1>
                 </Hover>
             </ReactHover>
         </div>
@@ -68,7 +68,7 @@ function wrapWithInfo(el: {}, hoverText: string) {
 
 function percentileWithInfo(rank: number, total: number, suffix: string) {
     const perc = percentile(rank, total, suffix)
-    return wrapWithInfo(perc, "Rank " + rank + " of " + total)
+    return wrapWithInfo(perc, "Rank " + rank + " of " + total, -250)
 }
 
 const InitialWordCard: React.FC<{
@@ -91,7 +91,9 @@ const InitialWordCard: React.FC<{
     const totalWords = result.numGuessed + result.numNotGuessed;
     const percentileBySuccessRate = percentileWithInfo(result.rankBySuccessRate, totalWords, "by success rate");
     const percentileByGuessesNeeded = percentileWithInfo(result.rankByGuessesNeeded, totalWords, "by number of guesses required")
-    const percentileWordsGuessed = wrapWithInfo((<div>Can successfully guess {percentileNum(result.numGuessed, totalWords)} percent of hidden words</div>), result.numGuessed + " out of " + totalWords)
+    const percentileWordsGuessed = wrapWithInfo(
+        (<div>Can successfully guess {percentileNum(result.numGuessed, totalWords)} percent of hidden words</div>),
+        "Can guess " + result.numGuessed + " out of " + totalWords + " words", -450)
     return (
         <div className={`p-2 text-2xl flex flex-col  w-full bg-gray-700 ${props.standalone ? "max-w-4xl border-white border rounded" : ""}`}>
             {props.standalone ? <div className="capitalize text-4xl text-teal-500 font-mono">{result.word}</div> : null}
