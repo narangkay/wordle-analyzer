@@ -43,7 +43,7 @@ function percentile(rank: number, total: number, suffix: string) {
 }
 const optionsCursorTrueWithMargin = {
     followCursor: true,
-    shiftX: 20,
+    shiftX: -200,
     shiftY: 0
 };
 
