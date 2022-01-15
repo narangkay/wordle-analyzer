@@ -22,7 +22,7 @@ const SingleWord: React.FC<{ result: StartingWord }> = (props) => {
                     <AccordionItemState>
                         {({ expanded }) => (expanded ? <HiChevronDown size={30} /> : <HiChevronRight size={30} />)}
                     </AccordionItemState>
-                    {props.result.word}
+                    {props.result.word} (Rank #{props.result.rankBySuccessRate})
                 </div>
             </AccordionItemButton>
         </AccordionItemHeading>
@@ -38,7 +38,9 @@ const InitialWordsAccordian: React.FC<{
     if (!props.results) {
         return <div ></div>;
     }
-    const items = props.results.map(r => <SingleWord key={`${r.word}`} result={r}></SingleWord>);
+    const items = props.results.sort(function (a, b) {
+        return a.rankBySuccessRate - b.rankBySuccessRate;
+    }).map(r => <SingleWord key={`${r.word}`} result={r}></SingleWord>);
     return (<Accordion allowZeroExpanded={true} className="w-full" id="initial-words-list">
         {items}
     </Accordion>);

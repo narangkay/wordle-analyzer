@@ -37,8 +37,13 @@ const appRouter = trpc.router().query('get-starting-words-results', {
     async resolve({ input }) {
         var resultsInDb: z.infer<typeof initialWordResult>[] = [];
         for (const result of input.results) {
-            const resultInDb = await prisma.startingWord.create({
-                data: {
+            const resultInDb = await prisma.startingWord.upsert({
+                where: {
+                    word: result.word,
+                },
+                update: {
+                },
+                create: {
                     ...result
                 }
             });
@@ -46,6 +51,11 @@ const appRouter = trpc.router().query('get-starting-words-results', {
         }
         return { success: true, result: resultsInDb };
     },
+}).mutation("delete-all-starting-word-results", {
+    async resolve() {
+        const deleteUsers = await prisma.startingWord.deleteMany({});
+        return { success: true, deleted: deleteUsers.count }
+    }
 });
 
 // export type definition of API

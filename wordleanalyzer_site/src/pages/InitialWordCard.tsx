@@ -16,7 +16,6 @@ function percentileNumSnapped(rank: number, total: number) {
             return perc;
         }
     }
-    percentiles = percentiles.reverse();
     for (var perc of percentiles) {
         if (p > (100 - perc)) {
             return 100 - perc;
@@ -89,14 +88,14 @@ const InitialWordCard: React.FC<{
         result = props.result
     }
     const totalWords = result.numGuessed + result.numNotGuessed;
-    const percentileBySuccessRate = percentileWithInfo(result.rankBySuccessRate, totalWords, "by success rate");
-    const percentileByGuessesNeeded = percentileWithInfo(result.rankByGuessesNeeded, totalWords, "by number of guesses required")
+    const percentileBySuccessRate = percentileWithInfo(result.rankBySuccessRate, 12478, "by success rate");
+    const percentileByGuessesNeeded = percentileWithInfo(result.rankByGuessesNeeded, 12478, "by number of guesses required")
     const percentileWordsGuessed = wrapWithInfo(
         (<div>Can successfully guess {percentileNum(result.numGuessed, totalWords)} percent of hidden words</div>),
         "Can guess " + result.numGuessed + " out of " + totalWords + " words", -450)
     return (
         <div className={`p-2 text-2xl flex flex-col  w-full bg-gray-700 ${props.standalone ? "max-w-4xl border-white border rounded" : ""}`}>
-            {props.standalone ? <div className="capitalize text-4xl text-teal-500 font-mono">{result.word}</div> : null}
+            {props.standalone ? <div className="capitalize text-4xl text-teal-500 font-mono">{result.word} (Rank #{result.rankBySuccessRate})</div> : null}
             {percentileWordsGuessed}
             {percentileBySuccessRate}
             <div className="py-4 px-5">
