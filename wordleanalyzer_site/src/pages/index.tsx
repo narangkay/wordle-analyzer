@@ -99,8 +99,6 @@ const Home = () => {
       <Link href="/about">
         <a>About</a>
       </Link>
-      <span className="p-4">{"-"}</span>
-      <a href="https://www.github.com/narangkay/">Github</a>
     </div>
   </div >
   )
