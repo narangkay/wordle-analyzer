@@ -71,7 +71,7 @@ const Home = () => {
     < CustomWordLookupForm setEnableSearch={setEnableSearch} setWordToSearch={setWordToSearch} searchResults={customStartingWordResult?.results} />
     <div className='p-4'></div>
     <div className=" p-2 flex flex-col justify-between w-full max-w-4xl">
-      <div className='w-full  h-16 text-center fkex text-4xl'>Top 10 starting words globally</div>
+      <div className='w-full  h-32 text-center fkex text-4xl'>Top 10 starting words globally</div>
       <InitialWordsAccordian results={startingWordResults?.results} />
     </div >
     <div className="w-full text-xl text-center pb-2">
