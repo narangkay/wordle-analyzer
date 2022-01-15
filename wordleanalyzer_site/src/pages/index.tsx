@@ -1,4 +1,5 @@
 import { trpc } from "@/utils/trpc"
+import Link from "next/link";
 import React, { useState } from "react";
 import CustomWordLookupForm from "./CustomWordLookupForm";
 import InitialWordsAccordian from "./InitialWordsAccordian";
@@ -69,10 +70,19 @@ const Home = () => {
     <div className='p-4'></div>
     < CustomWordLookupForm setEnableSearch={setEnableSearch} setWordToSearch={setWordToSearch} searchResults={customStartingWordResult?.results} />
     <div className='p-4'></div>
-    <div className=" p-2 flex flex-col justify-between w-full max-w-lg">
+    <div className=" p-2 flex flex-col justify-between w-full max-w-4xl">
       <div className='w-full  h-16 text-center fkex text-4xl'>Top 10 starting words globally</div>
       <InitialWordsAccordian results={startingWordResults?.results} />
     </div >
+    <div className="w-full text-xl text-center pb-2">
+      <a href="https://twitter.com/ancestrai">Twitter</a>
+      <span className="p-4">{"-"}</span>
+      <Link href="/about">
+        <a>About</a>
+      </Link>
+      <span className="p-4">{"-"}</span>
+      <a href="https://www.github.com/narangkay/">Github</a>
+    </div>
   </div >
   )
 }

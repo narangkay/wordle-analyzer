@@ -48,7 +48,8 @@ class CustomWordLookupForm extends React.Component<{ setEnableSearch: React.Disp
                     </button>
                 </div>
             </form >
-            <InitialWordCard result={this.props.searchResults} />
+            <div className='p-2'></div>
+            <InitialWordCard result={this.props.searchResults} standalone />
         </div >);
     }
 };

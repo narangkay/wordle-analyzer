@@ -17,17 +17,17 @@ type InitialWordResults = inferQueryResponse<"get-starting-words-results">;
 const SingleWord: React.FC<{ result: StartingWord }> = (props) => {
     return (<AccordionItem className="border w-full" uuid={`id-${props.result.word}`}>
         <AccordionItemHeading>
-            <AccordionItemButton className="capitalize w-full py-4 px-5 text-base text-white text-left bg-gray-900 focus:outline-none">
-                <div className="flex items-center">
+            <AccordionItemButton className="capitalize w-full py-4 px-5 text-base text-left bg-gray-900 focus:outline-none">
+                <div className="flex items-center text-3xl text-teal-500 font-mono">
                     <AccordionItemState>
-                        {({ expanded }) => (expanded ? <HiChevronDown size={25} /> : <HiChevronRight size={25} />)}
+                        {({ expanded }) => (expanded ? <HiChevronDown size={30} /> : <HiChevronRight size={30} />)}
                     </AccordionItemState>
                     {props.result.word}
                 </div>
             </AccordionItemButton>
         </AccordionItemHeading>
         <AccordionItemPanel>
-            <InitialWordCard result={props.result} />
+            <InitialWordCard result={props.result} standalone={false} />
         </AccordionItemPanel>
     </AccordionItem>);
 };
