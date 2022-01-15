@@ -16,18 +16,18 @@ bool compareResults(Result r1, Result r2)
 {
     if (r1.wordsguessed == r2.wordsguessed)
     {
-        return r1.guesses < r2.guesses;
+        return r1.guesses * r2.wordsguessed < r2.guesses * r1.wordsguessed;
     }
     return r1.wordsguessed > r2.wordsguessed;
 }
 
 bool compareResultsByGuessesNeeded(Result r1, Result r2)
 {
-    if (r1.guesses == r2.guesses)
+    if (r1.guesses * r2.wordsguessed == r2.guesses * r1.wordsguessed)
     {
         return r1.wordsguessed > r2.wordsguessed;
     }
-    return r1.guesses < r2.guesses;
+    return r1.guesses * r2.wordsguessed < r2.guesses * r1.wordsguessed;
 }
 
 bool compareResultsBySuccessRateRank(Result r1, Result r2)
@@ -38,7 +38,7 @@ bool compareResultsBySuccessRateRank(Result r1, Result r2)
 vector<Result> loadResults()
 {
     ifstream indata;
-    indata.open("compressed_output/wordle-analyzer-result.json");
+    indata.open("compressed_output/official-wordle-analyzer-result.json");
     assert(indata);
     map<string, Result> results;
     string ans, initial;
@@ -95,7 +95,7 @@ int main()
     }
     sort(sorter.begin(), sorter.end(), compareResultsBySuccessRateRank);
     ofstream outdata;
-    outdata.open("compressed_output/top-starting-words.json");
+    outdata.open("compressed_output/official-top-starting-words.json");
     assert(outdata);
     for (auto x : sorter)
     {
