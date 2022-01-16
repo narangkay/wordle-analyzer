@@ -1,4 +1,5 @@
 import { trpc } from "@/utils/trpc"
+import Head from "next/head";
 // import { StartingWord } from "@prisma/client";
 // import { TRPCClientErrorLike } from "@trpc/client";
 // import { DefaultErrorShape } from "@trpc/server";
@@ -102,30 +103,40 @@ const Home = () => {
   //   retry: 3,
   // });
   // const deleteUsers = trpc.useMutation("delete-all-starting-word-results");
-  return (<div className="w-screen flex flex-col h-screen justify-start items-center">
-    <div className='p-4'></div>
-    {/* <button onClick={backfillDb(addResult, deleteUsers)}>Click me</button> */}
-    < CustomWordLookupForm setEnableSearch={setEnableSearch} setWordToSearch={setWordToSearch} searchResults={customStartingWordResult?.results} />
-    <div className='p-4'></div>
-    <div className=" p-2 flex flex-col justify-between w-full max-w-4xl">
-      <div className='w-full  text-center fkex text-4xl'>Top 10 Wordle starting words globally</div>
-      <div className='p-4'></div>
-      <div className="flex">
-        <div className='w-full  text-right fkex text-md'>Filter to commmon Wordle words</div>
-        <div className='p-1'></div>
-        <input checked={checked} onChange={() => setChecked(!checked)} className="mr-2 leading-tight" type="checkbox"></input>
-      </div>
-      <div className='p-1'></div>
-      <InitialWordsAccordian results={(checked ? startingWordResultsFiltered : startingWordResultsUnfiltered)?.results} />
-    </div >
-    <div className="w-full text-xl text-center pb-2">
-      <a href="https://twitter.com/ancestrai">Twitter</a>
-      <span className="p-4">{"-"}</span>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
+  return (
+    <div>
+      <Head>
+        <title>WordleAnalyzer - Test out your wordle starting word</title>
+        <meta
+          name="description"
+          content="WordleAnalyzer is a site that ranks all possible Wordle starting words."
+        />
+      </Head>
+      <div className="w-screen flex flex-col h-screen justify-start items-center">
+        <div className='p-4'></div>
+        {/* <button onClick={backfillDb(addResult, deleteUsers)}>Click me</button> */}
+        < CustomWordLookupForm setEnableSearch={setEnableSearch} setWordToSearch={setWordToSearch} searchResults={customStartingWordResult?.results} />
+        <div className='p-4'></div>
+        <div className=" p-2 flex flex-col justify-between w-full max-w-4xl">
+          <div className='w-full  text-center fkex text-4xl'>Top 10 Wordle starting words globally</div>
+          <div className='p-4'></div>
+          <div className="flex">
+            <div className='w-full  text-right fkex text-md'>Filter to commmon Wordle words</div>
+            <div className='p-1'></div>
+            <input checked={checked} onChange={() => setChecked(!checked)} className="mr-2 leading-tight" type="checkbox"></input>
+          </div>
+          <div className='p-1'></div>
+          <InitialWordsAccordian results={(checked ? startingWordResultsFiltered : startingWordResultsUnfiltered)?.results} />
+        </div >
+        <div className="w-full text-xl text-center pb-2">
+          <a href="https://twitter.com/ancestrai">Twitter</a>
+          <span className="p-4">{"-"}</span>
+          <Link href="/about">
+            <a>About</a>
+          </Link>
+        </div>
+      </div >
     </div>
-  </div >
   )
 }
 
