@@ -1,4 +1,5 @@
 module.exports = {
-    siteUrl: process.env.SITE_URL ?? ('http://localhost:' + (process.env.PORT ?? 3000)),
+    // TODO(narangkay) This should be auto inferred somehow.
+    siteUrl: "https://wordleanalyzer.com",
     generateRobotsTxt: true,
 }
