@@ -34,7 +34,7 @@ class CustomWordLookupForm extends React.Component<{ setEnableSearch: React.Disp
     render() {
         //Need to call this hook here per react rules
         return (<div className="w-screen flex flex-col h-screen justify-start items-center">
-            <div className="text-4xl text-center">How good is your starting word?</div>
+            <div className="text-4xl text-center">How good is your Wordle starting word?</div>
             <form className="w-full max-w-xs" onSubmit={this.handleClick}>
                 <div className="flex items-center border-b border-teal-500 py-2">
                     <input onChange={this.handleChange} className="text-6xl  appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="table" aria-label="free text" />

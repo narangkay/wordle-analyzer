@@ -108,10 +108,10 @@ const Home = () => {
     < CustomWordLookupForm setEnableSearch={setEnableSearch} setWordToSearch={setWordToSearch} searchResults={customStartingWordResult?.results} />
     <div className='p-4'></div>
     <div className=" p-2 flex flex-col justify-between w-full max-w-4xl">
-      <div className='w-full  text-center fkex text-4xl'>Top 10 starting words globally</div>
+      <div className='w-full  text-center fkex text-4xl'>Top 10 Wordle starting words globally</div>
       <div className='p-4'></div>
       <div className="flex">
-        <div className='w-full  text-right fkex text-md'>Filter to more commmon words</div>
+        <div className='w-full  text-right fkex text-md'>Filter to commmon Wordle words</div>
         <div className='p-1'></div>
         <input checked={checked} onChange={() => setChecked(!checked)} className="mr-2 leading-tight" type="checkbox"></input>
       </div>
