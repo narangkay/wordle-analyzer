@@ -92,7 +92,7 @@ const InitialWordCard: React.FC<{
     const percentileByGuessesNeeded = percentileWithInfo(result.rankByGuessesNeeded, 12478, "by number of guesses required")
     const percentileWordsGuessed = wrapWithInfo(
         (<div>Can successfully guess {percentileNum(result.numGuessed, totalWords)} percent of hidden words</div>),
-        "Can guess " + result.numGuessed + " out of " + totalWords + " words", -450)
+        "Can guess " + result.numGuessed + " out of " + totalWords + " words", -100)
     return (
         <div className={`p-2 text-2xl flex flex-col  w-full bg-gray-700 ${props.standalone ? "max-w-4xl border-white border rounded" : ""}`}>
             {props.standalone ? <div className="capitalize text-4xl text-teal-500 font-mono">{result.word} (Rank #{result.rankBySuccessRate})</div> : null}
