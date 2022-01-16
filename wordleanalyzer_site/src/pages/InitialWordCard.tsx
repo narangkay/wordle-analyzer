@@ -41,10 +41,10 @@ function percentile(rank: number, total: number, suffix: string) {
     </div>)
 }
 
-function wrapWithInfo(el: {}, hoverText: string, xShift: number) {
+function wrapWithInfo(el: {}, hoverText: string) {
     const optionsCursorTrueWithMargin = {
         followCursor: true,
-        shiftX: xShift,
+        shiftX: -220,
         shiftY: 0
     };
     return (<IconContext.Provider
@@ -58,7 +58,7 @@ function wrapWithInfo(el: {}, hoverText: string, xShift: number) {
                     <AiOutlineInfoCircle />
                 </Trigger>
                 <Hover type="hover">
-                    <h1 className="text text-black bg-gray-500 border border-black rounded"> {hoverText} </h1>
+                    <h1 className="text w-52 text-black bg-gray-500 border border-black rounded"> {hoverText} </h1>
                 </Hover>
             </ReactHover>
         </div>
@@ -67,7 +67,7 @@ function wrapWithInfo(el: {}, hoverText: string, xShift: number) {
 
 function percentileWithInfo(rank: number, total: number, suffix: string) {
     const perc = percentile(rank, total, suffix)
-    return wrapWithInfo(perc, "Rank " + rank + " of " + total, -250)
+    return wrapWithInfo(perc, "Rank " + rank + " of " + total)
 }
 
 const InitialWordCard: React.FC<{
@@ -92,7 +92,7 @@ const InitialWordCard: React.FC<{
     const percentileByGuessesNeeded = percentileWithInfo(result.rankByGuessesNeeded, 12478, "by number of guesses required")
     const percentileWordsGuessed = wrapWithInfo(
         (<div>Can successfully guess {percentileNum(result.numGuessed, totalWords)} percent of hidden words</div>),
-        "Can guess " + result.numGuessed + " out of " + totalWords + " words", -100)
+        "Can guess " + result.numGuessed + " out of " + totalWords + " words")
     return (
         <div className={`p-2 text-2xl flex flex-col  w-full bg-gray-700 ${props.standalone ? "max-w-4xl border-white border rounded" : ""}`}>
             {props.standalone ? <div className="capitalize text-4xl text-teal-500 font-mono">{result.word} (Rank #{result.rankBySuccessRate})</div> : null}
