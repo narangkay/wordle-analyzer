@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start",
     "postinstall": "prisma generate",
+    "postbuild": "next-sitemap",
     "lint": "next lint"
   },
   "dependencies": {
@@ -15,6 +16,7 @@
     "@trpc/react": "^9.16.0",
     "@trpc/server": "^9.16.0",
     "next": "12.0.7",
+    "next-sitemap": "^1.9.9",
     "react": "17.0.2",
     "react-accessible-accordion": "^4.0.0",
     "react-dom": "17.0.2",
